@@ -452,7 +452,7 @@
                         <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight mb-2 text-blue-600 print:text-black">
                             ${info.name}
                         </h1>
-                        <p class="text-xl sm:text-2xl font-medium mb-4 ${darkModeClasses} print:text-gray-700">
+                        <p class="text-xl sm:text-2xl font-medium mb-4 ${darkModeClasses} print:text-black-700">
                             ${info.title}
                         </p>
                         <div class="flex flex-wrap gap-4 text-sm sm:text-base opacity-90">
@@ -511,7 +511,7 @@
                         <span class="mt-1.5 text-blue-500 flex-shrink-0 print:text-black">
                             <div class="w-1.5 h-1.5 rounded-full bg-current"></div>
                         </span>
-                        <span class="text-slate-700 dark:text-slate-300 print:text-gray-700">${ach}</span>
+                        <span class="text-slate-700 dark:text-slate-300 print:text-black-700">${ach}</span>
                     </li>
                 `).join('');
 
@@ -522,17 +522,17 @@
                         <div class="absolute left-[-5px] top-2 w-3 h-3 rounded-full bg-blue-500 sm:hidden print:hidden"></div>
 
                         <div class="grid sm:grid-cols-12 gap-4 sm:gap-8 items-start group">
-                            <div class="sm:col-span-3 text-sm font-medium sm:text-right text-slate-500 dark:text-slate-400 print:text-gray-600 print-time">
+                            <div class="sm:col-span-3 text-sm font-medium sm:text-right text-slate-500 dark:text-slate-400 print:text-black-600 print-time">
                                 <div class="sticky top-24 print:static">
                                     ${job.period}
                                 </div>
                             </div>
                             <div class="sm:col-span-9">
                                 <h3 class="text-xl font-bold text-slate-900 dark:text-white print:text-black print:text-lg text-black">${job.role}</h3>
-                                <div class="text-blue-600 font-medium mb-2 print:text-gray-800 print:text-sm">
+                                <div class="text-blue-600 font-medium mb-2 print:text-black-800 print:text-sm">
                                     ${job.company} <span class="text-slate-400 mx-2">•</span> ${job.department}
                                 </div>
-                                <p class="mb-4 text-slate-600 dark:text-slate-300 italic print:text-gray-700 print:text-sm">
+                                <p class="mb-4 text-slate-600 dark:text-slate-300 italic print:text-black-700 print:text-sm">
                                     ${job.description}
                                 </p>
                                 <ul class="space-y-2">
@@ -574,12 +574,12 @@
                     <div class="p-6 rounded-2xl shadow-sm border transition-all duration-300 hover:shadow-md ${cardClasses} print:border-none print:shadow-none print:p-0 print:bg-transparent print:mb-4 break-inside-avoid">
                         <div class="flex justify-between items-start mb-2">
                             <h3 class="font-bold text-lg text-black dark:text-white print:text-black">${edu.degree}</h3>
-                            <span class="text-xs font-bold px-2 py-1 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-100 print:border print:border-gray-300 print:bg-transparent print:text-gray-700">
+                            <span class="text-xs font-bold px-2 py-1 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-100 print:border print:border-black-300 print:bg-transparent print:text-black-700">
                                 ${edu.year}
                             </span>
                         </div>
-                        <div class="text-blue-600 font-medium mb-3 print:text-gray-800">${edu.institution}</div>
-                        <div class="space-y-1 text-sm text-slate-600 dark:text-slate-300 print:text-gray-700">
+                        <div class="text-blue-600 font-medium mb-3 print:text-black-800">${edu.institution}</div>
+                        <div class="space-y-1 text-sm text-slate-600 dark:text-slate-300 print:text-black-700">
                             <div class="flex items-center gap-2">
                                 ${getIcon('CheckCircle2', 14, 'text-green-500 print:hidden')}
                                 <span>${edu.grade}</span>
@@ -614,7 +614,7 @@
                         : 'bg-white text-slate-700 shadow-sm border border-slate-100 hover:border-blue-200 hover:text-blue-600';
                     return `
                         <span 
-                            class="px-3 py-1.5 rounded-md text-sm font-medium transition-all hover:scale-105 cursor-default ${skillClasses} print:bg-transparent print:border print:border-gray-300 print:text-black print:shadow-none"
+                            class="px-3 py-1.5 rounded-md text-sm font-medium transition-all hover:scale-105 cursor-default ${skillClasses} print:bg-transparent print:border print:border-black-300 print:text-black print:shadow-none"
                         >
                             ${skill}
                         </span>
@@ -622,7 +622,7 @@
                 }).join('');
 
                 html += `
-                    <div class="rounded-2xl p-6 ${groupCardClasses} print:bg-transparent print:p-0 print:border print:border-gray-200 print:p-4 break-inside-avoid">
+                    <div class="rounded-2xl p-6 ${groupCardClasses} print:bg-transparent print:p-0 print:border print:border-black-200 print:p-4 break-inside-avoid">
                         <div class="flex items-center gap-3 mb-4">
                             <div class="p-2 rounded-lg ${iconContainerClasses} print:hidden">
                                 ${getIcon(skillGroup.iconName, 20)}
