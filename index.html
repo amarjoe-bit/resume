@@ -319,8 +319,8 @@
                 toggleButton.innerHTML = getIcon('Sun', 20);
 
             } else {
-                body.classList.remove('bg-black-900', 'text-black-100');
-                body.classList.add('bg-black-50', 'text-black-800');
+                body.classList.remove('bg-slate-900', 'text-black-100');
+                body.classList.add('bg-slate-50', 'text-black-800');
                 body.setAttribute('data-theme', 'light');
 
                 navbar.classList.remove('bg-slate-900/95', 'border-slate-800');
@@ -573,13 +573,13 @@
                 html += `
                     <div class="p-6 rounded-2xl shadow-sm border transition-all duration-300 hover:shadow-md ${cardClasses} print:border-none print:shadow-none print:p-0 print:bg-transparent print:mb-4 break-inside-avoid">
                         <div class="flex justify-between items-start mb-2">
-                            <h3 class="font-bold text-lg text-black dark:text-white print:text-black">${edu.degree}</h3>
+                            <h3 class="font-bold text-lg text-black-700 dark:text-white print:text-black">${edu.degree}</h3>
                             <span class="text-xs font-bold px-2 py-1 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-100 print:border print:border-black-300 print:bg-transparent print:text-black-700">
                                 ${edu.year}
                             </span>
                         </div>
                         <div class="text-blue-600 font-medium mb-3 print:text-black-800">${edu.institution}</div>
-                        <div class="space-y-1 text-sm text-slate-600 dark:text-slate-300 print:text-black-700">
+                        <div class="space-y-1 text-sm text-black-600 dark:text-slate-300 print:text-black-700">
                             <div class="flex items-center gap-2">
                                 ${getIcon('CheckCircle2', 14, 'text-green-500 print:hidden')}
                                 <span>${edu.grade}</span>
