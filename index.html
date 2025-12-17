@@ -319,8 +319,8 @@
                 toggleButton.innerHTML = getIcon('Sun', 20);
 
             } else {
-                body.classList.remove('bg-slate-900', 'text-black-100');
-                body.classList.add('bg-slate-50', 'text-black-800');
+                body.classList.remove('bg-black-900', 'text-black-100');
+                body.classList.add('bg-black-50', 'text-black-800');
                 body.setAttribute('data-theme', 'light');
 
                 navbar.classList.remove('bg-slate-900/95', 'border-slate-800');
@@ -498,7 +498,7 @@
         function renderExperience() {
             const experience = resumeData.experience;
             let html = `
-                <h2 class="text-2xl font-bold mb-8 flex items-center gap-2 text-red-600 print:text-black">
+                <h2 class="text-2xl font-bold mb-8 flex items-center gap-2 text-blue-600 print:text-black">
                     <span class="p-1 rounded bg-blue-100 dark:bg-blue-900/30 print:hidden">${getIcon('Briefcase', 20)}</span>
                     Professional Experience
                 </h2>
@@ -511,7 +511,7 @@
                         <span class="mt-1.5 text-blue-500 flex-shrink-0 print:text-black">
                             <div class="w-1.5 h-1.5 rounded-full bg-current"></div>
                         </span>
-                        <span class="text-slate-700 dark:text-slate-300 print:text-black-700">${ach}</span>
+                        <span class="text-black-700 dark:text-slate-300 print:text-black-700">${ach}</span>
                     </li>
                 `).join('');
 
@@ -522,17 +522,17 @@
                         <div class="absolute left-[-5px] top-2 w-3 h-3 rounded-full bg-blue-500 sm:hidden print:hidden"></div>
 
                         <div class="grid sm:grid-cols-12 gap-4 sm:gap-8 items-start group">
-                            <div class="sm:col-span-3 text-sm font-medium sm:text-right text-slate-500 dark:text-slate-400 print:text-black-600 print-time">
+                            <div class="sm:col-span-3 text-sm font-medium sm:text-right text-black-500 dark:text-slate-400 print:text-black-600 print-time">
                                 <div class="sticky top-24 print:static">
                                     ${job.period}
                                 </div>
                             </div>
                             <div class="sm:col-span-9">
-                                <h3 class="text-xl font-bold text-slate-900 dark:text-white print:text-black print:text-lg text-black">${job.role}</h3>
+                                <h3 class="text-xl font-bold text-black-900 dark:text-white print:text-black print:text-lg text-black">${job.role}</h3>
                                 <div class="text-blue-600 font-medium mb-2 print:text-black-800 print:text-sm">
-                                    ${job.company} <span class="text-slate-400 mx-2">•</span> ${job.department}
+                                    ${job.company} <span class="text-black-400 mx-2">•</span> ${job.department}
                                 </div>
-                                <p class="mb-4 text-slate-600 dark:text-slate-300 italic print:text-black-700 print:text-sm">
+                                <p class="mb-4 text-black-600 dark:text-slate-300 italic print:text-black-700 print:text-sm">
                                     ${job.description}
                                 </p>
                                 <ul class="space-y-2">
