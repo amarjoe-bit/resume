@@ -1,0 +1,469 @@
+import React, { useState, useEffect, useRef } from 'react';
+import { 
+  Briefcase, 
+  GraduationCap, 
+  MapPin, 
+  Mail, 
+  Phone, 
+  Download, 
+  Moon, 
+  Sun, 
+  Award, 
+  Cpu, 
+  PenTool, 
+  Globe, 
+  CheckCircle2,
+  Menu,
+  X,
+  Printer,
+  FileText
+} from 'lucide-react';
+
+// Resume Data
+const resumeData = {
+  personalInfo: {
+    name: "Amar Johan bin Ishak",
+    title: "Risk Engineer | Civil Engineering Graduate",
+    email: "iiamarjohan@gmail.com",
+    phone: "017-412 6162",
+    location: "Rawang, Selangor",
+    summary: "Dedicated Risk Engineer with a robust background in civil engineering and a specialization in property and fire risk assessment. Proven track record in conducting comprehensive surveys, evaluating loss exposures, and implementing practical risk improvement measures. Innovative professional actively driving productivity through AI and automation integration in engineering workflows. adept at bridging technical engineering concepts with actionable business risk strategies."
+  },
+  experience: [
+    {
+      id: 1,
+      role: "Risk Engineer",
+      company: "Malaysian Reinsurance Berhad",
+      department: "Technical Services Department",
+      period: "March 2022 - Present",
+      description: "Conducting comprehensive risk surveys and driving digital transformation in reporting.",
+      achievements: [
+        "Conduct comprehensive property and fire risk surveys for residential, commercial, and industrial portfolios to support underwriting decisions.",
+        "Assess fire protection systems (sprinklers, alarms, hydrants) against RFT requirements and international standards.",
+        "Evaluate building construction, occupancy hazards, and maintenance practices to determine Maximum Possible Loss (MPL).",
+        "Author clear, structured risk engineering reports providing prioritized recommendations for risk improvement.",
+        "Collaborate with underwriters and brokers to clarify risk findings, directly influencing pricing and acceptance strategies.",
+        "Spearhead productivity initiatives by integrating AI and automation tools into survey documentation and analysis workflows."
+      ]
+    },
+    {
+      id: 2,
+      role: "Training Organizer",
+      company: "Malaysian Reinsurance Berhad",
+      department: "Market Training Department",
+      period: "April 2021 - February 2022",
+      description: "Managed end-to-end logistics for high-impact professional training programs.",
+      achievements: [
+        "Coordinated internal and external training programs, workshops, and seminars for industry participants.",
+        "Managed full-cycle training logistics including virtual platforms, scheduling, and participant registration.",
+        "Liaised with trainers, vendors, and stakeholders to align content objectives with delivery requirements.",
+        "Oversaw budget tracking, invoicing, and CPD compliance for regulatory training events.",
+        "Analyzed participant feedback to continuously improve training quality and operational efficiency."
+      ]
+    }
+  ],
+  education: [
+    {
+      id: 1,
+      degree: "Bachelor of Civil Engineering (Hons.)",
+      institution: "University of Malaysia Sarawak (UNIMAS)",
+      year: "Graduated 2020",
+      grade: "CGPA: 3.06",
+      details: "Final Year Project: Perforated Polymer Concrete Plate (PPCP) in Coastal Engineering (Grade A)."
+    },
+    {
+      id: 2,
+      degree: "Foundation in Physical Science",
+      institution: "Pusat Pra-Universiti, UNIMAS",
+      year: "2015 – 2016",
+      grade: "CGPA: 3.74 (Dean’s List)",
+      details: "High academic achievement focusing on physical sciences."
+    }
+  ],
+  skills: [
+    {
+      category: "Technical Engineering",
+      icon: <Briefcase className="w-5 h-5" />,
+      items: ["Risk Assessment", "Fire Protection Systems", "Building Code Compliance", "Loss Exposure Analysis", "AutoCAD", "Mathcad", "Data Analysis"]
+    },
+    {
+      category: "Innovation & Design",
+      icon: <Cpu className="w-5 h-5" />,
+      items: ["AI & Automation Integration", "Workflow Optimization", "Graphic Design", "Infographics", "Poster Design"]
+    },
+    {
+      category: "Soft Skills",
+      icon: <Award className="w-5 h-5" />,
+      items: ["Public Speaking (BM)", "Technical Reporting", "Stakeholder Management", "Project Coordination", "Problem Solving"]
+    },
+    {
+      category: "Sustainability",
+      icon: <Globe className="w-5 h-5" />,
+      items: ["Environmental Awareness", "Sustainable Practices", "Coastal Engineering Knowledge"]
+    }
+  ]
+};
+
+const App = () => {
+  const [darkMode, setDarkMode] = useState(false);
+  const [activeSection, setActiveSection] = useState('summary');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [showPrintModal, setShowPrintModal] = useState(false);
+  const printRef = useRef();
+
+  // Handle scroll spy for active section
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ['summary', 'experience', 'education', 'skills'];
+      const scrollPosition = window.scrollY + 100;
+
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element && element.offsetTop <= scrollPosition && (element.offsetTop + element.offsetHeight) > scrollPosition) {
+          setActiveSection(section);
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const toggleTheme = () => {
+    setDarkMode(!darkMode);
+  };
+
+  const initiatePrint = () => {
+    setShowPrintModal(true);
+  };
+
+  const executePrint = () => {
+    setShowPrintModal(false);
+    // Small delay to ensure modal is closed before print dialog opens
+    setTimeout(() => {
+      window.print();
+    }, 300);
+  };
+
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop - 80,
+        behavior: 'smooth'
+      });
+      setIsMenuOpen(false);
+    }
+  };
+
+  return (
+    <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-slate-900 text-slate-100' : 'bg-slate-50 text-slate-800'} font-sans print:bg-white print:text-black`}>
+      
+      {/* Navigation Bar */}
+      <nav className={`fixed top-0 w-full z-50 transition-all duration-300 shadow-md ${darkMode ? 'bg-slate-900/95 border-b border-slate-800' : 'bg-white/95 border-b border-slate-200'} print:hidden backdrop-blur-sm`}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16 items-center">
+            <div className="flex-shrink-0 flex items-center cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+              <div className={`h-10 w-10 rounded-lg flex items-center justify-center font-bold text-xl mr-2 ${darkMode ? 'bg-blue-600 text-white' : 'bg-blue-600 text-white'}`}>
+                AJ
+              </div>
+              <span className="font-bold text-lg hidden sm:block">Amar Johan</span>
+            </div>
+            
+            <div className="hidden md:flex items-center space-x-8">
+              {['Summary', 'Experience', 'Education', 'Skills'].map((item) => (
+                <button
+                  key={item}
+                  onClick={() => scrollToSection(item.toLowerCase())}
+                  className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                    activeSection === item.toLowerCase()
+                      ? 'text-blue-500 bg-blue-50/10'
+                      : 'hover:text-blue-500'
+                  }`}
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+
+            <div className="flex items-center space-x-4">
+              <button
+                onClick={toggleTheme}
+                className={`p-2 rounded-full transition-colors ${darkMode ? 'hover:bg-slate-800 text-yellow-400' : 'hover:bg-slate-100 text-slate-600'}`}
+                aria-label="Toggle Theme"
+              >
+                {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+              </button>
+              <div className="md:hidden">
+                <button
+                  onClick={() => setIsMenuOpen(!isMenuOpen)}
+                  className="p-2"
+                >
+                  {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden absolute w-full bg-inherit border-b border-inherit shadow-lg animate-in slide-in-from-top-5">
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+              {['Summary', 'Experience', 'Education', 'Skills'].map((item) => (
+                <button
+                  key={item}
+                  onClick={() => scrollToSection(item.toLowerCase())}
+                  className="block w-full text-left px-3 py-4 text-base font-medium hover:bg-blue-50/10 hover:text-blue-500"
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+      </nav>
+
+      {/* Print Instruction Modal */}
+      {showPrintModal && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 print:hidden animate-in fade-in duration-200">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full overflow-hidden animate-in zoom-in-95 duration-200">
+            <div className="p-6">
+              <div className="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full mb-4 mx-auto text-blue-600">
+                <Printer size={24} />
+              </div>
+              <h3 className="text-xl font-bold text-center text-slate-900 mb-2">Save as PDF</h3>
+              <p className="text-center text-slate-600 mb-6">
+                To save this resume, we'll open your browser's print window.
+              </p>
+              
+              <div className="bg-slate-50 rounded-xl p-4 mb-6 border border-slate-100">
+                <ol className="text-sm text-slate-700 space-y-3">
+                  <li className="flex gap-3">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold">1</span>
+                    <span>Click <strong>"Proceed to Print"</strong> below.</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold">2</span>
+                    <span>In the destination/printer option, select <strong>"Save as PDF"</strong>.</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold">3</span>
+                    <span>Click <strong>Save</strong> to download the file.</span>
+                  </li>
+                </ol>
+              </div>
+
+              <div className="flex gap-3">
+                <button 
+                  onClick={() => setShowPrintModal(false)}
+                  className="flex-1 py-2.5 px-4 rounded-xl border border-slate-200 text-slate-600 font-medium hover:bg-slate-50 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button 
+                  onClick={executePrint}
+                  className="flex-1 py-2.5 px-4 rounded-xl bg-blue-600 text-white font-medium hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30 flex items-center justify-center gap-2"
+                >
+                  <FileText size={18} />
+                  Proceed to Print
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Main Content */}
+      <main className="pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto print:pt-0 print:px-0 print:max-w-full print:w-full" ref={printRef}>
+        
+        {/* Header / Hero */}
+        <header className="mb-16 text-center sm:text-left print:mb-8 print:text-left animate-in fade-in duration-700 break-inside-avoid">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 border-b pb-8 print:pb-4 border-slate-200 dark:border-slate-800">
+            <div>
+              <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight mb-2 text-blue-600 print:text-black">
+                {resumeData.personalInfo.name}
+              </h1>
+              <p className={`text-xl sm:text-2xl font-medium mb-4 ${darkMode ? 'text-slate-300' : 'text-slate-600'} print:text-gray-700`}>
+                {resumeData.personalInfo.title}
+              </p>
+              <div className="flex flex-wrap gap-4 text-sm sm:text-base opacity-90">
+                <a href={`mailto:${resumeData.personalInfo.email}`} className="flex items-center gap-2 hover:text-blue-500 transition-colors">
+                  <Mail size={16} /> {resumeData.personalInfo.email}
+                </a>
+                <span className="hidden sm:inline text-slate-300 dark:text-slate-600">|</span>
+                <a href={`tel:${resumeData.personalInfo.phone}`} className="flex items-center gap-2 hover:text-blue-500 transition-colors">
+                  <Phone size={16} /> {resumeData.personalInfo.phone}
+                </a>
+                <span className="hidden sm:inline text-slate-300 dark:text-slate-600">|</span>
+                <div className="flex items-center gap-2">
+                  <MapPin size={16} /> {resumeData.personalInfo.location}
+                </div>
+              </div>
+            </div>
+            {/* Reverted back to initials */}
+            <div className="hidden sm:block print:hidden">
+              <div className={`w-24 h-24 rounded-full flex items-center justify-center text-3xl font-bold shadow-inner ${darkMode ? 'bg-slate-800 text-blue-500' : 'bg-slate-200 text-blue-600'}`}>
+                AJ
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Summary Section */}
+        <section id="summary" className="mb-16 scroll-mt-24 print:mb-8 break-inside-avoid">
+          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-blue-600 print:text-black">
+            <span className="p-1 rounded bg-blue-100 dark:bg-blue-900/30 print:hidden"><PenTool size={20} /></span>
+            Professional Summary
+          </h2>
+          <div className={`p-6 rounded-2xl shadow-sm border ${darkMode ? 'bg-slate-800/50 border-slate-700' : 'bg-white border-slate-100'} print:shadow-none print:border-none print:p-0 print:bg-transparent`}>
+            <p className="leading-relaxed text-lg print:text-sm">
+              {resumeData.personalInfo.summary}
+            </p>
+          </div>
+        </section>
+
+        {/* Experience Section */}
+        <section id="experience" className="mb-16 scroll-mt-24 print:mb-8">
+          <h2 className="text-2xl font-bold mb-8 flex items-center gap-2 text-blue-600 print:text-black">
+            <span className="p-1 rounded bg-blue-100 dark:bg-blue-900/30 print:hidden"><Briefcase size={20} /></span>
+            Professional Experience
+          </h2>
+          
+          <div className="space-y-12 print:space-y-6">
+            {resumeData.experience.map((job) => (
+              <div key={job.id} className="relative pl-8 sm:pl-0 break-inside-avoid">
+                {/* Timeline Line (Hidden in print) */}
+                <div className="absolute left-0 top-2 bottom-0 w-0.5 bg-blue-200 dark:bg-blue-900 sm:hidden print:hidden"></div>
+                <div className="absolute left-[-5px] top-2 w-3 h-3 rounded-full bg-blue-500 sm:hidden print:hidden"></div>
+
+                <div className={`grid sm:grid-cols-12 gap-4 sm:gap-8 items-start group`}>
+                  <div className="sm:col-span-3 text-sm font-medium sm:text-right text-slate-500 dark:text-slate-400 print:text-gray-600 print:w-32">
+                    <div className="sticky top-24 print:static">
+                      {job.period}
+                    </div>
+                  </div>
+                  <div className="sm:col-span-9">
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-white print:text-black print:text-lg">{job.role}</h3>
+                    <div className="text-blue-600 font-medium mb-2 print:text-gray-800 print:text-sm">
+                      {job.company} <span className="text-slate-400 mx-2">•</span> {job.department}
+                    </div>
+                    <p className="mb-4 text-slate-600 dark:text-slate-300 italic print:text-gray-700 print:text-sm">
+                      {job.description}
+                    </p>
+                    <ul className="space-y-2">
+                      {job.achievements.map((achievement, idx) => (
+                        <li key={idx} className="flex items-start gap-3 text-base leading-snug print:text-sm">
+                          <span className="mt-1.5 text-blue-500 flex-shrink-0 print:text-black">
+                             <div className="w-1.5 h-1.5 rounded-full bg-current"></div>
+                          </span>
+                          <span className="text-slate-700 dark:text-slate-300 print:text-gray-800">{achievement}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Education Section */}
+        <section id="education" className="mb-16 scroll-mt-24 print:mb-8 break-inside-avoid">
+          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-blue-600 print:text-black">
+             <span className="p-1 rounded bg-blue-100 dark:bg-blue-900/30 print:hidden"><GraduationCap size={20} /></span>
+            Education
+          </h2>
+          <div className="grid md:grid-cols-2 gap-6 print:block print:space-y-6">
+            {resumeData.education.map((edu) => (
+              <div key={edu.id} className={`p-6 rounded-2xl shadow-sm border transition-all duration-300 hover:shadow-md ${darkMode ? 'bg-slate-800/50 border-slate-700 hover:border-slate-600' : 'bg-white border-slate-100 hover:border-blue-100'} print:border-none print:shadow-none print:p-0 print:bg-transparent print:mb-4 break-inside-avoid`}>
+                <div className="flex justify-between items-start mb-2">
+                  <h3 className="font-bold text-lg text-slate-900 dark:text-white print:text-black">{edu.degree}</h3>
+                  <span className="text-xs font-bold px-2 py-1 rounded-full bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-100 print:border print:border-gray-300 print:bg-transparent print:text-gray-700">
+                    {edu.year}
+                  </span>
+                </div>
+                <div className="text-blue-600 font-medium mb-3 print:text-gray-800">{edu.institution}</div>
+                <div className="space-y-1 text-sm text-slate-600 dark:text-slate-300 print:text-gray-700">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle2 size={14} className="text-green-500 print:hidden" />
+                    <span>{edu.grade}</span>
+                  </div>
+                  {edu.details && (
+                     <div className="flex items-start gap-2 mt-2">
+                     <span className="mt-1"><CheckCircle2 size={14} className="text-green-500 print:hidden" /></span>
+                     <span>{edu.details}</span>
+                   </div>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Skills Section */}
+        <section id="skills" className="scroll-mt-24 break-inside-avoid">
+          <h2 className="text-2xl font-bold mb-6 flex items-center gap-2 text-blue-600 print:text-black">
+            <span className="p-1 rounded bg-blue-100 dark:bg-blue-900/30 print:hidden"><Cpu size={20} /></span>
+            Technical Skills & Proficiency
+          </h2>
+          <div className="grid sm:grid-cols-2 gap-6 print:grid-cols-2">
+            {resumeData.skills.map((skillGroup, idx) => (
+              <div key={idx} className={`rounded-2xl p-6 ${darkMode ? 'bg-slate-800/30' : 'bg-slate-50'} print:bg-transparent print:p-0 print:border print:border-gray-200 print:p-4 break-inside-avoid`}>
+                <div className="flex items-center gap-3 mb-4">
+                  <div className={`p-2 rounded-lg ${darkMode ? 'bg-slate-700 text-blue-400' : 'bg-white text-blue-600 shadow-sm'} print:hidden`}>
+                    {skillGroup.icon}
+                  </div>
+                  <h3 className="font-bold text-lg">{skillGroup.category}</h3>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {skillGroup.items.map((skill, sIdx) => (
+                    <span 
+                      key={sIdx} 
+                      className={`px-3 py-1.5 rounded-md text-sm font-medium transition-all hover:scale-105 cursor-default ${
+                        darkMode 
+                          ? 'bg-slate-700 text-slate-200 hover:bg-slate-600' 
+                          : 'bg-white text-slate-700 shadow-sm border border-slate-100 hover:border-blue-200 hover:text-blue-600'
+                      } print:bg-transparent print:border print:border-gray-300 print:text-black print:shadow-none`}
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+      </main>
+
+      {/* Footer */}
+      <footer className={`py-8 text-center border-t print:hidden ${darkMode ? 'bg-slate-900 border-slate-800 text-slate-500' : 'bg-white border-slate-100 text-slate-400'}`}>
+        <p className="text-sm">© {new Date().getFullYear()} Amar Johan bin Ishak. All rights reserved.</p>
+        <p className="text-xs mt-2">Built with React & Tailwind CSS</p>
+      </footer>
+
+      {/* CSS for print to hide non-printable elements and format nicely */}
+      <style>{`
+        @media print {
+          @page { margin: 1.0cm; }
+          body, #root { 
+            background: white !important; 
+            color: black !important; 
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+            height: auto !important;
+            overflow: visible !important;
+          }
+          nav, footer, button, .print\\:hidden { display: none !important; }
+          /* Ensure breaks happen in logical places */
+          h1, h2, h3 { break-after: avoid; }
+          img, svg { break-inside: avoid; }
+          p, li { orphans: 3; widows: 3; }
+        }
+      `}</style>
+    </div>
+  );
+};
+
+export default App;
