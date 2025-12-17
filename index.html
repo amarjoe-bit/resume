@@ -53,7 +53,7 @@
         }
     </style>
 </head>
-<body class="transition-colors duration-300 bg-slate-50 text-slate-800 font-sans print:bg-white print:text-black" data-theme="light">
+<body class="transition-colors duration-300 bg-slate-50 text-black-800 font-sans print:bg-white print:text-black" data-theme="light">
     <div id="app">
         
         <!-- Navigation Bar -->
@@ -70,7 +70,7 @@
                     </div>
 
                     <div class="flex items-center space-x-4">
-                        <button id="theme-toggle" class="p-2 rounded-full transition-colors hover:bg-slate-100 text-slate-600" aria-label="Toggle Theme">
+                        <button id="theme-toggle" class="p-2 rounded-full transition-colors hover:bg-slate-100 text-black-600" aria-label="Toggle Theme">
                             <!-- Icon injected by JS -->
                         </button>
                         <button id="print-button" class="p-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-colors hidden sm:flex items-center gap-2 text-sm font-medium" onclick="initiatePrint()">
@@ -101,13 +101,13 @@
                     <div class="flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full mb-4 mx-auto text-blue-600">
                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-center text-slate-900 mb-2">Save as PDF</h3>
-                    <p class="text-center text-slate-600 mb-6">
+                    <h3 class="text-xl font-bold text-center text-black-900 mb-2">Save as PDF</h3>
+                    <p class="text-center text-black-600 mb-6">
                         To save this resume, we'll open your browser's print window.
                     </p>
                     
                     <div class="bg-slate-50 rounded-xl p-4 mb-6 border border-slate-100">
-                        <ol class="text-sm text-slate-700 space-y-3">
+                        <ol class="text-sm text-black-700 space-y-3">
                             <li class="flex gap-3">
                                 <span class="flex-shrink-0 w-6 h-6 rounded-full bg-blue-600 text-white flex items-center justify-center text-xs font-bold">1</span>
                                 <span>Click <strong>"Proceed to Print"</strong> below.</span>
@@ -126,7 +126,7 @@
                     <div class="flex gap-3">
                         <button 
                             onclick="closePrintModal()"
-                            class="flex-1 py-2.5 px-4 rounded-xl border border-slate-200 text-slate-600 font-medium hover:bg-slate-50 transition-colors"
+                            class="flex-1 py-2.5 px-4 rounded-xl border border-slate-200 text-black-600 font-medium hover:bg-slate-50 transition-colors"
                         >
                             Cancel
                         </button>
@@ -173,7 +173,7 @@
         </main>
 
         <!-- Footer -->
-        <footer id="footer" class="py-8 text-center border-t print:hidden bg-white border-slate-100 text-slate-400">
+        <footer id="footer" class="py-8 text-center border-t print:hidden bg-white border-slate-100 text-black-400">
             <!-- Content injected by JS -->
         </footer>
 
@@ -319,15 +319,15 @@
                 toggleButton.innerHTML = getIcon('Sun', 20);
 
             } else {
-                body.classList.remove('bg-slate-900', 'text-slate-100');
-                body.classList.add('bg-slate-50', 'text-slate-800');
+                body.classList.remove('bg-slate-900', 'text-black-100');
+                body.classList.add('bg-slate-50', 'text-black-800');
                 body.setAttribute('data-theme', 'light');
 
                 navbar.classList.remove('bg-slate-900/95', 'border-slate-800');
                 navbar.classList.add('bg-white/95', 'border-slate-200');
 
                 toggleButton.classList.remove('hover:bg-slate-800', 'text-yellow-400');
-                toggleButton.classList.add('hover:bg-slate-100', 'text-slate-600');
+                toggleButton.classList.add('hover:bg-slate-100', 'text-black-600');
                 toggleButton.innerHTML = getIcon('Moon', 20);
             }
             localStorage.setItem('darkMode', isDarkMode);
@@ -443,7 +443,7 @@
 
         function renderHeader() {
             const info = resumeData.personalInfo;
-            const darkModeClasses = isDarkMode ? 'text-slate-300' : 'text-slate-600';
+            const darkModeClasses = isDarkMode ? 'text-slate-300' : 'text-black-600';
             const initialsBg = isDarkMode ? 'bg-slate-800 text-blue-500' : 'bg-slate-200 text-blue-600';
             
             document.getElementById('header').innerHTML = `
